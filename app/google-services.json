@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "590997272178",
+    "project_id": "weather-b22b4",
+    "storage_bucket": "weather-b22b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590997272178:android:854e46ec053492668cf4eb",
+        "android_client_info": {
+          "package_name": "com.devanand.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590997272178-5be0r2j9j5pa39lb1d2vsfb1q20dslla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_KQNc9NgqttpTW0us0_LZ3C_Vv_aHiUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590997272178-5be0r2j9j5pa39lb1d2vsfb1q20dslla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
