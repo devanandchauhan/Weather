@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -41,6 +42,7 @@ android {
 dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:19.0.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     apply plugin: 'kotlin-android-extensions'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -61,5 +63,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'com.karumi:dexter:6.0.1'
+
 
 }
