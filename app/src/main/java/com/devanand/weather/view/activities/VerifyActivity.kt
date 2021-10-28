@@ -3,6 +3,7 @@ package com.devanand.weather.view.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Toast
 import com.devanand.weather.databinding.ActivityVerifyBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -10,12 +11,14 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.activity_verify.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class VerifyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVerifyBinding
     lateinit var auth: FirebaseAuth
-
+    //private var TAG = "VerifyActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,22 @@ class VerifyActivity : AppCompatActivity() {
         auth=FirebaseAuth.getInstance()
 
         val storedVerificationId=intent.getStringExtra("storedVerificationId")
+
+        object : CountDownTimer(120000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                // Used for formatting digit to be in 2 digits only
+                val f: NumberFormat = DecimalFormat("00")
+                val min = millisUntilFinished / 60000 % 60
+                val sec = millisUntilFinished / 1000 % 60
+                timerCounter.setText("${f.format(min)}:${f.format(sec)}")
+            }
+
+            override fun onFinish() {
+                //Toast.makeText(this@VerifyActivity,"Session Timeout",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(applicationContext,LoginActivity::class.java))
+                finish()
+            }
+        }.start()
 
         verifyBtn.setOnClickListener {
             var otp = otpId.text.toString().trim()
