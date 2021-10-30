@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.devanand.weather.databinding.ActivityLoginBinding
+import com.devanand.weather.model.Constants
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -21,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
     lateinit var storedVerificationId:String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-    private val TAG = "MainActivity"
     @Suppress("DEPRECATION")
     private lateinit var progressDialog: ProgressDialog
 
@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        var currentUser = auth.currentUser
+        val currentUser = auth.currentUser
         if (currentUser != null) {
             startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
@@ -57,32 +57,23 @@ class LoginActivity : AppCompatActivity() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
-
-
-
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-
                 progressDialog.dismiss()
-                Log.d(TAG,"ErrorMessage!!!!!")
+                Log.d(Constants.TAG_LOGINACTIVITY,"ErrorMessage!!!!!")
                 Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
             }
 
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
-
-                Log.d(TAG, "onCodeSent:$verificationId")
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                Log.d(Constants.TAG_LOGINACTIVITY, "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
 
-                var intent = Intent(applicationContext, VerifyActivity::class.java)
+                val intent = Intent(applicationContext, VerifyActivity::class.java)
                 progressDialog.dismiss()
                 intent.putExtra("storedVerificationId", storedVerificationId)
                 startActivity(intent)
-
             }
         }
     }
@@ -106,8 +97,5 @@ class LoginActivity : AppCompatActivity() {
             .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
-
-
     }
-
 }

@@ -10,28 +10,28 @@ import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var mBinding:ActivitySplashScreenBinding
+    private lateinit var binding:ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        if (getSupportActionBar() != null) {
+        val actionBar = supportActionBar
+
+        // showing the back button in action bar
+        if (actionBar != null) {
             getSupportActionBar()?.hide()
         }
 
         locationWeather.setAnimation(R.raw.locationweather)
         locationWeather.playAnimation()
 
-
-
         @Suppress("DEPRECATION")
         Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-
         }, 2000)
 
     }

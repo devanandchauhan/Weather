@@ -18,7 +18,6 @@ class VerifyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVerifyBinding
     lateinit var auth: FirebaseAuth
-    //private var TAG = "VerifyActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +38,13 @@ class VerifyActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                //Toast.makeText(this@VerifyActivity,"Session Timeout",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(applicationContext,LoginActivity::class.java))
                 finish()
             }
         }.start()
 
         verifyBtn.setOnClickListener {
-            var otp = otpId.text.toString().trim()
+            val otp = otpId.text.toString().trim()
             if(!otp.isEmpty()){
                 val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
                     storedVerificationId.toString(), otp)
